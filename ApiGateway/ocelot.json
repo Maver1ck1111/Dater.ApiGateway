@@ -1,0 +1,94 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl":  "http://localhost:5000"
+  },
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/login",
+      "DownstreamPathTemplate": "/api/auth/login",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authService",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
+      "DownstreamScheme": "http"
+    },
+    {
+      "UpstreamPathTemplate": "/register",
+      "DownstreamPathTemplate": "/api/auth/register",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authService",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
+      "DownstreamScheme": "http"
+    },
+    {
+      "UpstreamPathTemplate": "/refresh",
+      "DownstreamPathTemplate": "/api/auth/refresh",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authService",
+          "Port": 8080
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
+      "DownstreamScheme": "http"
+    },
+    {
+      "UpstreamPathTemplate": "/profile",
+      "DownstreamPathTemplate": "/api/profile",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profileService",
+          "Port": 7070
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST", "PUT", "DELETE", "OPTIONS" ],
+      "DownstreamScheme": "http",
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "JwtBearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/profile/{accountId}",
+      "DownstreamPathTemplate": "/api/profile/{accountId}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profileService",
+          "Port": 7070
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamScheme": "http",
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "JwtBearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/profile/getPhotoById/{accountID}/{index}",
+      "DownstreamPathTemplate": "/api/profile/getPhotoById/{accountID}/{index}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profileService",
+          "Port": 7070
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamScheme": "http",
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "JwtBearer",
+        "AllowedScopes": []
+      }
+    }
+  ]
+}

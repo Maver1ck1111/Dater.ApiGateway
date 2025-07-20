@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
 builder.Services.AddAuthentication(opt =>
 {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(opt =>
+}).AddJwtBearer("JwtBearer", opt =>
 {
     opt.TokenValidationParameters = new TokenValidationParameters()
     {
@@ -23,6 +27,10 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 
+builder.Services.AddAuthorization();
+
+builder.Services.AddOcelot(builder.Configuration);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -36,6 +44,10 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAllOrigins");
+
 app.UseAuthentication();
+app.UseAuthorization();
+
+await app.UseOcelot();
 
 app.Run();
