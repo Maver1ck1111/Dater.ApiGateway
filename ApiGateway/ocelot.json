@@ -1,6 +1,6 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl":  "http://localhost:5000"
+    "BaseUrl":  "http://localhost:7070"
   },
   "Routes": [
     {
@@ -8,8 +8,8 @@
       "DownstreamPathTemplate": "/api/auth/login",
       "DownstreamHostAndPorts": [
         {
-          "Host": "authService",
-          "Port": 8080
+          "Host": "localhost",
+          "Port": 6060
         }
       ],
       "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
@@ -20,8 +20,8 @@
       "DownstreamPathTemplate": "/api/auth/register",
       "DownstreamHostAndPorts": [
         {
-          "Host": "authService",
-          "Port": 8080
+          "Host": "localhost",
+          "Port": 6060
         }
       ],
       "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
@@ -32,8 +32,8 @@
       "DownstreamPathTemplate": "/api/auth/refresh",
       "DownstreamHostAndPorts": [
         {
-          "Host": "authService",
-          "Port": 8080
+          "Host": "localhost",
+          "Port": 6060
         }
       ],
       "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
@@ -44,8 +44,25 @@
       "DownstreamPathTemplate": "/api/profile",
       "DownstreamHostAndPorts": [
         {
-          "Host": "profileService",
-          "Port": 7070
+          "Host": "localhost",
+          "Port": 5050
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST", "PUT", "DELETE", "OPTIONS" ],
+      "DownstreamScheme": "http",
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "JwtBearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/set-photo/{accountID}",
+      "DownstreamPathTemplate": "/api/profile/set-photo/{accountID}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5050
         }
       ],
       "UpstreamHttpMethod": [ "POST", "PUT", "DELETE", "OPTIONS" ],
@@ -61,8 +78,8 @@
       "DownstreamPathTemplate": "/api/profile/{accountId}",
       "DownstreamHostAndPorts": [
         {
-          "Host": "profileService",
-          "Port": 7070
+          "Host": "localhost",
+          "Port": 5050
         }
       ],
       "UpstreamHttpMethod": [ "GET" ],
@@ -74,12 +91,12 @@
       }
     },
     {
-      "UpstreamPathTemplate": "/profile/getPhotoById/{accountID}/{index}",
-      "DownstreamPathTemplate": "/api/profile/getPhotoById/{accountID}/{index}",
+      "UpstreamPathTemplate": "/profile/getPhotoByID/{accountID}/{index}",
+      "DownstreamPathTemplate": "/api/profile/getPhotoByID/{accountID}/{index}",
       "DownstreamHostAndPorts": [
         {
-          "Host": "profileService",
-          "Port": 7070
+          "Host": "localhost",
+          "Port": 5050
         }
       ],
       "UpstreamHttpMethod": [ "GET" ],
