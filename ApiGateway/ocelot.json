@@ -91,12 +91,46 @@
       }
     },
     {
+      "UpstreamPathTemplate": "/getProfilesByFilter",
+      "DownstreamPathTemplate": "/api/profile/getProfilesByFilter",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5050
+        }
+      ],
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamScheme": "http",
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "JwtBearer",
+        "AllowedScopes": []
+      }
+    },
+    {
       "UpstreamPathTemplate": "/profile/getPhotoByID/{accountID}/{index}",
       "DownstreamPathTemplate": "/api/profile/getPhotoByID/{accountID}/{index}",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5050
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamScheme": "http",
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "JwtBearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/getChats/{userID}",
+      "DownstreamPathTemplate": "/api/chats/getChats/{userID}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3030
         }
       ],
       "UpstreamHttpMethod": [ "GET" ],
